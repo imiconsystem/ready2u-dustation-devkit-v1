@@ -314,9 +314,6 @@ void configForm() {
 
            storageGetString("WiFissid").c_str(), storageGetString("WiFipassword").c_str(), maxTemp, maxHumi, maxPM1, maxPM2, maxPM10, storageGetString("webTitle").c_str(), storageGetString("deviceName").c_str(),storageGetString("APssid").c_str(), storageGetString("APpassword").c_str());
   server.send(200, "text/html", html);
-
-  //storageGetString("WiFissid"), storageGetString("WiFipassword"), maxTemp, maxHumi, maxPM1, maxPM2, maxPM10, storageGetString("webTitle"), storageGetString("deviceName"),storageGetString("APssid"), storageGetString("APpassword"));
-  server.send(200, "text/html", html);
 }
 
 void saveConfig() {
