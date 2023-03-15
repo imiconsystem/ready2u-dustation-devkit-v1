@@ -1,6 +1,6 @@
 # Ready to use Dustation web monitoring & WiFi management system
 
-ระบบ Web Monitoring & WiFi management สำหรับ Dustation Dev Kit V.2 ใช้ในการแสดงผลค่าต่างๆที่วัดได้ และการตั้งค่าต่างๆ ผ่านเว็บบราวเซอร์
+ระบบ Web Monitoring & WiFi management สำหรับ Dustation Dev Kit V1.3 ใช้ในการแสดงผลค่าต่างๆที่วัดได้ และการตั้งค่าต่างๆ ผ่านเว็บบราวเซอร์
 
 ![Web Monitoring](https://github.com/imiconsystem/ready2u-dustation-web-man/blob/05ab6494c5ddb51680ab3f0a95cbbac5019feeb9/images/cover.JPG)
 
@@ -18,7 +18,8 @@
 - การตั้งค่าผ่าน WiFi AP Mode
 
 ## Compatible Hardware
-บอร์ดพัฒนา Dustation Dev Kit V.2 [สั่งซื้อ]
+บอร์ดพัฒนา Dustation Dev Kit V.2 [สั่งซื้อออนไลน์](https://www.imiconsystem.com/product/dustation-dev-kit-v1-3-set/)
+
 ![Dustation Dev Kit V.2](https://github.com/imiconsystem/ready2u-dustation-web-man/blob/694120d0fe497af0d9d4f870288c20bf4b264d62/images/20220909_152200.jpg)
 
 ## Hardware setup
@@ -27,8 +28,8 @@
 - ติดตั้งอุปกรณ์ทั้งหมดให้ถูกต้องครบถ้วนได้แก่
 1. ESP32
 2. PMS7003
-3. AM2302
-4. OLED
+3. AM2302 (optional)
+4. OLED (optional)
 
 
 ## Software setup
@@ -46,11 +47,9 @@
 1. เปิดโปรแกรม Arduino IDE
 2. เข้าเมนู Tools เลือกบอร์ด DOIT ESP32 DEVKIT V1
 3. เลือกพอร์ต
-4. ดาวน์โหลดโค๊ดโปรแกรม https://github.com/imiconsystem/ready2u-dustation-web-man/releases
+4. ดาวน์โหลดโค๊ดโปรแกรม https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/releases
 5. เปิดไฟล์ readyu2-dustation-web-man.ino
 6. อัพโหลดไฟล์
-
-![On running](https://github.com/imiconsystem/ready2u-dustation-web-man/blob/8295b6e236ca6e23bd5ed517b748eebe14d9c49d/images/running.gif)
 
 ## การใช้งานตั้งค่า 'SET MODE' 
 - กด Switch ค้างไว้… แล้ว กด EN หรือ reset บน ESP32 1 ครั้ง จากนั้นรอ 2 วินาที จึงปล่อยปุ่ม Switch บน OLED Display จะแสดงผล IP address , SSID และ Password สำหรับการเข้าถึงการตั้งค่าผ่าน WiFi
@@ -80,6 +79,3 @@ SET MODE ประกอบไปด้วย
 ## **หมายเหตุ
 
 ระบบปฏิบัติการของท่านต้องติดตั้ง mDNS service ถึงจะสามารถเข้าดูหน้าเว็บด้วยโดเมนเนมได้ ซึ่งระบบปฏิบัติการส่วนมากจะติดตั้งให้โดยอัตโนมัติแล้ว  [>> เรียนรู้เพิ่มเติม](https://espressif.github.io/esp-protocols/mdns/en/index.html)
-
-## TODOs
-- รองรับการตั้งค่า URL สำหรับเชื่อมต่อ MQTT server
