@@ -112,32 +112,33 @@ void handleRoot() {
   String pm25word,relayText, maxTempClass, maxHumiClass, maxPM1Class, maxPM2Class, maxPM10Class, icon;
   pm25word = pm25lev.word.c_str();
 
+
   relayText = "OFF";
-  if (TEMP > maxTemp) {
+  if (TEMP > maxTemp && maxTemp > 0) {
     maxTempClass = "alert";
     relayText = "ON";
   } else
     maxTempClass = "normal";
 
-  if (HUMI > maxHumi) {
+  if (HUMI > maxHumi && maxHumi > 0) {
     maxHumiClass = "alert";
     relayText = "ON";
   } else
     maxHumiClass = "normal";
 
-  if (PM1 > maxPM1) {
+  if (PM1 > maxPM1 && maxPM1 > 0) {
     maxPM1Class = "alert";
     relayText = "ON";
   } else
     maxPM1Class = "normal";
 
-  if (PM2 > maxPM2) {
+  if (PM2 > maxPM2 && maxPM2 > 0) {
     maxPM2Class = "alert";
     relayText = "ON";
   } else
     maxPM2Class = "normal";
 
-  if (PM10 > maxPM10) {
+  if (PM10 > maxPM10 && maxPM10 > 0) {
     maxPM10Class = "alert";
     relayText = "ON";
   } else
@@ -207,7 +208,7 @@ void handleRoot() {
 </div>\
 <div class=\"relay-box\" style=\"text-align:center; padding-top:30px;\">\
 <div>\
-<h1>RELAY</h1>\
+<h1>WARNING</h1>\
 <span class=\"val\">%s</span>\
 </div>\
 <div class=\"max-val\">\

@@ -17,5 +17,6 @@ void dhtLoop(void) {
 
   if (isnan(TEMP) || isnan(HUMI)) {
     Serial.println("AM2302 Failed");
+    TEMP = HUMI = 0;
   }
 }
