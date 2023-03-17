@@ -4,6 +4,9 @@ String APssid = "R2Devkit";
 String APpassword = "dddddddd";
 
 int SETMODE = 0;
+int devRunmode;
+int DEVRUNMODE = 1; // Accesspoint mode (AP)
+//int DEVRUNMODE = 2; // Station mode (ST)
 
 String WiFissid = "";
 String WiFipassword = "";
@@ -14,6 +17,7 @@ String webTitle = "DustStion1";
 String device_name = "dst";
 
 int32_t maxTemp, maxHumi, maxPM1, maxPM2, maxPM10;
+
 
 int32_t PM1, PM2, PM10, AQI;
 float_t TEMP, HUMI;
@@ -46,11 +50,14 @@ void setup() {
   PM10 = 0;
   AQI = 0.0;
 
+  
+  Serial.print("DEVICE MODE: ");
+  Serial.println(storageGetInt("devRunmode"));
   if (SETMODE == 1)  // SET
   {
     SETMODE = true;
     logString = "Set mode..";
-    wifiapSetup();
+    wifiapSetup(1); // AP for setup
     oledLogLoop();
 
   } else if (SETMODE == 2) {  // RESET FACTORY
@@ -60,7 +67,11 @@ void setup() {
     ESP.restart();
   } else {
     // RUN
-    webserverSetup();
+    if(storageGetInt("devRunmode").toInt()==2) {
+      webserverSetup(); // ST mode
+    }else {
+      wifiapSetup(0); // AP for Run
+    }
     logString = "System starting..";
     oledLogLoop();
   }
@@ -89,17 +100,9 @@ void loop() {
 
   if (SETMODE == 0) {
 
-    webserverLoop();
+    if(storageGetInt("devRunmode") == 0) webserverLoop();
     clientLoop();
-
-    //if (millis() > pmsNextRead) {
-    //  while (!pmsReadDone) {
-        pmsLoop();
-    //  }
-    //  pmsReadDone = false;
-    //  pmsNextRead = millis() + pmsWaitPeriod;
-    //}
-
+    pmsLoop();
     dhtLoop();
     controlRelay();
     oledLoop();

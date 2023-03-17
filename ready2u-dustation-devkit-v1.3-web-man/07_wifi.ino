@@ -8,7 +8,7 @@ WebServer server(80);
 
 String authFailResponse = "Authentication Failed";
 
-void wifiapSetup() {
+void wifiapSetup(bool isAPSET) {
   Serial.println("Configuring access point...");
   Serial.println("APssid");
   Serial.println(storageGetString("APssid"));
@@ -33,8 +33,13 @@ void wifiapSetup() {
   dis.concat("\n");
   logString = dis;
 
-  server.on("/", configForm);
-  server.on("/saveConfig", saveConfig);
+  if (isAPSET) {
+    server.on("/", configForm);
+    server.on("/saveConfig", saveConfig);
+  }else{
+    server.on("/", handleRoot);
+  }
+
 
   server.onNotFound(handleNotFound);
 
@@ -109,7 +114,7 @@ void clientLoop() {
 void handleRoot() {
 
   char html[4000];
-  String pm25word,relayText, maxTempClass, maxHumiClass, maxPM1Class, maxPM2Class, maxPM10Class, icon;
+  String pm25word, relayText, maxTempClass, maxHumiClass, maxPM1Class, maxPM2Class, maxPM10Class, icon;
   pm25word = pm25lev.word.c_str();
 
 
@@ -154,7 +159,7 @@ void handleRoot() {
     icon = "&#128578;";
   } else if (pm25lev.icon == " ") {
     icon = "&#128512;";
-  }else{
+  } else {
     icon = " ";
   }
 
@@ -256,13 +261,19 @@ void configForm() {
 <meta charset=\"UTF-8\" />\
 <title>System configuration.</title>\
 <style>\
-   html{width:100%%;height:100%%}body{margin:0 30px;background:#005157;font-family:Arial,Helvetica,sans-serif;font-size:1.8rem;color:#eee}input:not([type=checkbox]){padding:20px;font-size:20px;width:100%%;margin:10px 0;font-weight:700;font-size:2rem;border:0;border-radius:5px;}legend h1{font-size:2.5rem;;color:#7fffd4}input[type=submit]{background-color:#32ab4e;}\
+   html{width:100%%;height:100%%}body{margin:0 30px;background:#005157;font-family:Arial,Helvetica,sans-serif;font-size:1.8rem;color:#eee}input:not([type=checkbox]),select,option{padding:20px;font-size:20px;width:100%%;margin:10px 0;font-weight:700;font-size:2rem;border:0;border-radius:5px;}legend h1{font-size:2.5rem;;color:#7fffd4}input[type=submit]{background-color:#32ab4e;}\
 </style>\
 </head>\
 <body>\
 <div style=\"width:95vw;margin:auto;\">\
 <h1>System configuration.</h1>\
 <form action=\"/saveConfig\" method=\"POST\">\
+<fieldset>\
+<legend>\
+<h1>Device runing mode:</h1>\
+</legend>\
+<div><select name=\"devRunmode\"><option value=\"1\">Accesspoint mode</option><option value=\"2\">Station mode</option></select></div>\
+</fieldset>\
 <fieldset>\
 <legend>\
 <h1>WiFi Router credential:</h1>\
@@ -313,22 +324,24 @@ void configForm() {
 </body>\
 </html>",
 
-           storageGetString("WiFissid").c_str(), storageGetString("WiFipassword").c_str(), maxTemp, maxHumi, maxPM1, maxPM2, maxPM10, storageGetString("webTitle").c_str(), storageGetString("deviceName").c_str(),storageGetString("APssid").c_str(), storageGetString("APpassword").c_str());
+           storageGetString("WiFissid").c_str(), storageGetString("WiFipassword").c_str(), maxTemp, maxHumi, maxPM1, maxPM2, maxPM10, storageGetString("webTitle").c_str(), storageGetString("deviceName").c_str(), storageGetString("APssid").c_str(), storageGetString("APpassword").c_str());
   server.send(200, "text/html", html);
 }
 
 void saveConfig() {
 
-  char temp, humi, pm1, pm2, pm10;
+  char temp, humi, pm1, pm2, pm10, _devRunmode;
 
-  temp = humi = pm1 = pm2 = pm10 = 0;
+  temp = humi = pm1 = pm2 = pm10 = _devRunmode = 0;
 
   String message = "<h3>Data saved.<br></h3><hr>";
   String WIFIssid, WIFIpassword, APssid, APpassword, _webTitle, _deviceName;
   // message += (server.method() == HTTP_GET) ? "GET" : "POST";
   for (uint8_t i = 0; i < server.args(); i++) {
     message += " <b>" + server.argName(i) + ":</b> ______" + server.arg(i) + "______<br>\n";
-    if (server.argName(i) == "APssid") {
+    if (server.argName(i) == "devRunmode") {
+      _devRunmode = server.arg(i).toInt();
+    } else if (server.argName(i) == "APssid") {
       APssid = server.arg(i);
     } else if (server.argName(i) == "APpassword") {
       APpassword = server.arg(i);
@@ -357,7 +370,7 @@ void saveConfig() {
    html{width:100%%;height:100%%}body{margin:30px;background:#005157;font-family:Arial,Helvetica,sans-serif;color:#eee}\
 </style></head><body><script>alert('Saving data please wait until device restarted.');</script><br><br></body></html>";
   server.send(200, "text/html", message);
-
+  storagePutInt("devRunmode", _devRunmode);
   storagePutString("APssid", APssid);
   storagePutString("APpassword", APpassword);
   storagePutString("WiFissid", WIFIssid);

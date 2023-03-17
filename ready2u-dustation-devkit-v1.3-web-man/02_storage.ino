@@ -6,7 +6,13 @@ const char *prekey = "APcredentials";
 
 void storageSetup() {
   String WIssid, WIpass, Assid, Apass, www_realm, www_username, www_password, _device_name, _webTitle;
+
   preferences.begin(prekey, false);
+
+  devRunmode = preferences.getInt("devRunmode",0);
+
+  Serial.print("devRunmode before: ");
+  Serial.println(preferences.getInt("devRunmode"));
 
   maxTemp = preferences.getInt("maxTemp", 0);
   maxHumi = preferences.getInt("maxHumi", 0);
@@ -27,7 +33,17 @@ void storageSetup() {
   www_username = preferences.getString("www_username", "").c_str();
   www_password = preferences.getString("www_password", "").c_str();
 
-  if (Assid == "" || Apass == "") {
+  if (devRunmode == 0) {
+    Serial.print("SET devRunmode: ");
+    preferences.putInt("devRunmode", DEVRUNMODE);
+    Serial.println("No values saved for Device run mode");
+    Serial.println("Device run mode Saved using default value.");
+  }
+  
+  Serial.print("devRunmode after: ");
+  Serial.println(preferences.getInt("devRunmode"));
+
+    if (Assid == "" || Apass == "") {
     preferences.putString("APssid", APssid);
     preferences.putString("APpassword", APpassword);
     Serial.println("No values saved for APssid or APpassword");
