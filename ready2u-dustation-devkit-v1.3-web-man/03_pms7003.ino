@@ -67,7 +67,8 @@ void pmsSleep() {
   Serial.println("Going to sleep.");
   //digitalWrite(set, LOW);  //Setting hardware sleep
   pms.sleep();  //software sleep
-  pmsSleepPeriod = 120;
+  //pmsSleepPeriod = 120;
+  pmsSleepPeriod = 10;
   pmsIsWakeup = false;
 }
 
