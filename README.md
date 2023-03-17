@@ -18,13 +18,11 @@
 - การตั้งค่าผ่าน WiFi AP Mode
 
 ## Compatible Hardware
-บอร์ดพัฒนา Dustation Dev Kit V.2 [สั่งซื้อออนไลน์](https://www.imiconsystem.com/product/dustation-dev-kit-v1-3-set/)
+บอร์ดพัฒนา Dustation Dev Kit V1.3 [สั่งซื้อออนไลน์](https://www.imiconsystem.com/product/dustation-dev-kit-v1-3-set/)
 
-![Dustation Dev Kit V.2](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/20220909_152200.jpg)
+![Dustation Dev Kit V1.3](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/20220909_152200.jpg)
 
 ## Hardware setup
-- บนบอร์ด Dustation Dev Kit V.2 เลื่อน dip switch ของ SET ไปที่ ON (Set mode)
-![Set mode](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/pms-set.jpg)
 - ติดตั้งอุปกรณ์ทั้งหมดให้ถูกต้องครบถ้วนได้แก่
 1. ESP32
 2. PMS7003
@@ -57,16 +55,14 @@
 
 SET MODE ประกอบไปด้วย
 
-1. ส่วนของการตั้งค่า WiFi Router เชื่อมต่อ WiFi เข้ากับ Router ที่บ้านหรือสำนักงาน
-2. ส่วนของการตั้งค่า Set Max Values เงื่อนไขในการตั้งค่าจุดควบคุมสั่งงานผ่าน Relay
-3. ส่วนของการตั้งค่า System Setting ใช้สำหรับ ตั้งค่าชื่อและไอดีอุปกรณ์
-4. ส่วนของการตั้งค่า WiFi Access Point [AP Mode] เพื่อใช้ในการเข้าถึง/การจัดการ Dustation Dev Kit V.2
+1. ส่วนของการตั้งค่าโหมด Accesspoint (Soft-AP) และ Station mode
+    - AP mode (Soft-AP mode หรือ Access Point mode) โหมดสำหรับใช้งานบอร์ดจำลองตัวเองเป็น Access Point (อุปกรณ์ปล่อยสัญญาณ Wi-Fi) เพื่อให้อุปกรณ์อื่นๆสามารถเชื่อมต่อกับบอร์ด
+    - STA mode (Station mode หรือ Wi-Fi client mode) โหมดสำหรับใช้งานบอร์ดเป็น Station เพื่อเชื่อมต่อเข้ากับ Access Point เช่น Router, Mobile Hotspot
+2. ส่วนของการตั้งค่า WiFi Router เชื่อมต่อ WiFi เข้ากับ Router ที่บ้านหรือสำนักงาน
+3. ส่วนของการตั้งค่า Set Max Values เงื่อนไขในการตั้งค่าจุดควบคุมสั่งงานผ่าน Relay
+4. ส่วนของการตั้งค่า System Setting ใช้สำหรับ ตั้งค่าชื่อและไอดีอุปกรณ์
+5. ส่วนของการตั้งค่า WiFi Access Point [AP Mode] เพื่อใช้ในการเข้าถึง/การจัดการ Dustation Dev Kit V1.3
 
-![SET MODE](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/143818-1.jpg)
-
-![SET MODE](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/143819-1.jpg)
-
-![SET MODE](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/143820-1.jpg)
 
 ## Factory Reset เพื่อกลับสู่ค่าเริ่มต้น 'RESET MODE'
 

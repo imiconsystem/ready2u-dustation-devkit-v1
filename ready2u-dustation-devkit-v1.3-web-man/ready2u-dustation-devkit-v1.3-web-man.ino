@@ -6,7 +6,7 @@ String APpassword = "dddddddd";
 int SETMODE = 0;
 int devRunmode;
 int DEVRUNMODE = 1; // Accesspoint mode (AP)
-//bool DEVRUNMODE = 2 // Station mode (ST)
+//int DEVRUNMODE = 2; // Station mode (ST)
 
 String WiFissid = "";
 String WiFipassword = "";
