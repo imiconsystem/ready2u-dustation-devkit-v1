@@ -5,8 +5,8 @@ String APpassword = "dddddddd";
 
 int SETMODE = 0;
 int devRunmode;
-int DEVRUNMODE = 1; // Accesspoint mode (AP)
-//int DEVRUNMODE = 2; // Station mode (ST)
+//int DEVRUNMODE = 1; // Accesspoint mode (AP)
+int DEVRUNMODE = 2; // Station mode (ST)
 
 String WiFissid = "";
 String WiFipassword = "";
@@ -38,7 +38,7 @@ void setup() {
   pmsSetup();
   oledSetup();
   oledLogSetup();
-  relaySetup();
+  //relaySetup();
   resetbuttonSetup();
   storageSetup();
   dhtSetup();
@@ -77,34 +77,35 @@ void setup() {
   }
 }
 
-void controlRelay() {
-  if (TEMP > maxTemp) {
-    relayHi(R1);
-  } else if (HUMI > maxHumi) {
-    relayHi(R1);
-  } else if (PM1 > maxPM1) {
-    relayHi(R1);
-  } else if (PM2 > maxPM2) {
-    relayHi(R1);
-  } else if (PM10 > maxPM10) {
-    relayHi(R1);
-  } else {
-    relayLo(R1);
-  }
-}
+// void controlRelay() {
+//   if (TEMP > maxTemp) {
+//     relayHi(R1);
+//   } else if (HUMI > maxHumi) {
+//     relayHi(R1);
+//   } else if (PM1 > maxPM1) {
+//     relayHi(R1);
+//   } else if (PM2 > maxPM2) {
+//     relayHi(R1);
+//   } else if (PM10 > maxPM10) {
+//     relayHi(R1);
+//   } else {
+//     relayLo(R1);
+//   }
+// }
 
 
 
 void loop() {
 
+  
 
   if (SETMODE == 0) {
 
-    if(storageGetInt("devRunmode") == 0) webserverLoop();
+    if(storageGetInt("devRunmode").toInt() == 1) webserverLoop();
     clientLoop();
     pmsLoop();
     dhtLoop();
-    controlRelay();
+    //controlRelay();
     oledLoop();
 
   } else {

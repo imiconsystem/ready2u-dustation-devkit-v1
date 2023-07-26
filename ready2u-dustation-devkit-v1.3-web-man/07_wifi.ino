@@ -19,6 +19,7 @@ void wifiapSetup(bool isAPSET) {
   WiFi.softAP(storageGetString("APssid").c_str(), storageGetString("APpassword").c_str());
 
   IPAddress myIP = WiFi.softAPIP();
+  localIP = myIP.toString();
   Serial.print("AP IP address: ");
   Serial.println(myIP);
   String dis = "";

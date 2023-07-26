@@ -23,7 +23,7 @@ void oledLogSetup(void) {
   u8g2.setFont(u8g2_font_squeezed_b7_tr);
   u8g2log.begin(u8g2, U8LOG_WIDTH, U8LOG_HEIGHT, u8log_buffer);
   u8g2log.setLineHeightOffset(0);
-  u8g2log.setRedrawMode(0);
+  u8g2log.setRedrawMode(0);  // 0: Update screen with newline, 1: Update screen for every char
 }
 
 
@@ -39,16 +39,31 @@ void oledDrawPage2() {
 
 void oledDrawPage3() {
 
-    u8g2.setFont(u8g2_font_siji_t_6x10);
-    u8g2.drawGlyph(0, 8, 0xE219);   //wifi
-    u8g2.drawGlyph(0, 16, 0xE0F2);  //rssi
+  String devMode[2] = { "AP", "ST" };
 
-    u8g2.setFont(u8g2_font_squeezed_b7_tr);
-    u8g2.drawStr(15, 8, storageGetString("WiFissid").c_str());
-    u8g2.drawStr(15, 17, WiFiRSSI.c_str());
-    u8g2.drawStr(50, 17, localIP.c_str());
-    u8g2.drawStr(50, 26, storageGetString("deviceName").c_str());
-  
+  u8g2.setFont(u8g2_font_siji_t_6x10);
+  u8g2.drawGlyph(0, 8, 0xE219);                                                 //wifi
+
+  u8g2.setFont(u8g2_font_squeezed_b7_tr);
+  if (storageGetInt("devRunmode").toInt() == 1) {  // AT mode
+    u8g2.drawStr(15, 8, storageGetString("APssid").c_str());
+    u8g2.drawStr(15, 17, storageGetString("APpassword").c_str());
+    u8g2.drawStr(15, 26, localIP.c_str());
+    u8g2.drawFrame(90, 21, 20, 11);
+    u8g2.drawStr(96, 30, devMode[0].c_str());
+  } else if (storageGetInt("devRunmode").toInt() == 2) {  // ST mode
+    if (storageGetString("WiFissid").isEmpty()) {
+      u8g2.drawStr(15, 8, "Please config WiFi!");
+    } else {
+      u8g2.drawGlyph(0, 16, 0xE0F2);  //rssi
+      u8g2.drawStr(15, 8, storageGetString("WiFissid").c_str());
+      u8g2.drawStr(15, 17, WiFiRSSI.c_str());
+      u8g2.drawStr(50, 17, localIP.c_str());
+      u8g2.drawStr(50, 26, storageGetString("deviceName").c_str());
+    }
+    u8g2.drawFrame(10, 21, 20, 11);
+    u8g2.drawStr(16, 30, devMode[1].c_str());
+  }
 }
 
 
@@ -56,8 +71,8 @@ void oledDrawMain(void) {
   u8g2.setFont(u8g2_font_squeezed_b7_tr);
   u8g2.drawStr(0, 8, "PM2.5");
 
-  u8g2.drawStr(9, 23, u8x8_u8toa(TEMP>99?99:TEMP, 2));
-  u8g2.drawStr(9, 32, u8x8_u8toa(HUMI>99?99:HUMI, 2));
+  u8g2.drawStr(9, 23, u8x8_u8toa(TEMP > 99 ? 99 : TEMP, 2));
+  u8g2.drawStr(9, 32, u8x8_u8toa(HUMI > 99 ? 99 : HUMI, 2));
 
   u8g2.setFont(u8g2_font_siji_t_6x10);
   u8g2.drawGlyph(-4, 23, 0xE01D);  //icon termo
@@ -69,9 +84,9 @@ void oledDrawMain(void) {
 
   u8g2.setFont(u8g2_font_squeezed_r7_tr);
   u8g2.drawStr(93, 8, "PM1:");
-  u8g2.drawStr(115, 8, u8x8_u8toa(PM1>999?999:PM1, 3));
+  u8g2.drawStr(115, 8, u8x8_u8toa(PM1 > 999 ? 999 : PM1, 3));
   u8g2.drawStr(93, 16, "PM10:");
-  u8g2.drawStr(115, 16, u8x8_u8toa(PM10>999?999:PM10, 3));
+  u8g2.drawStr(115, 16, u8x8_u8toa(PM10 > 999 ? 999 : PM10, 3));
 
   u8g2.drawStr(97, 31, "g/m^3");
 
@@ -79,8 +94,7 @@ void oledDrawMain(void) {
   u8g2.drawGlyph(91, 30, 0X00B5);  //u
 
   u8g2.setFont(u8g2_font_7_Seg_33x19_mn);
-  u8g2.drawStr(30, 0, u8x8_u8toa(PM2>999?999:PM2, 3));
-
+  u8g2.drawStr(30, 0, u8x8_u8toa(PM2 > 999 ? 999 : PM2, 3));
 }
 
 uint8_t draw_state = 0;
@@ -92,7 +106,6 @@ void oledDrawState(void) {
     case 2:
       oledDrawPage3();
       break;
-
   }
 }
 void oledLogLoop() {
