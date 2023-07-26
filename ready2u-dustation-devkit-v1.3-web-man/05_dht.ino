@@ -1,6 +1,8 @@
 #include <DHT.h>
 
-#define DHTPIN 15      // pin for Dustation Devkit v2
+
+//#define DHTPIN 15      // pin for Dustation Devkit v1.3
+#define DHTPIN 23      // pin for Dustation Devkit v1.4
 #define DHTTYPE DHT22  // DHT 22 (AM2302)
 
 DHT dht(DHTPIN, DHTTYPE);
