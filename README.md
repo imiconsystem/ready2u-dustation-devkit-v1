@@ -1,6 +1,6 @@
 # Ready to use Dustation web monitoring & WiFi management system
 
-ระบบ Web Monitoring & WiFi management สำหรับ Dustation Dev Kit V1.3 ใช้ในการแสดงผลค่าต่างๆที่วัดได้ และการตั้งค่าต่างๆ ผ่านเว็บบราวเซอร์
+ระบบ Web Monitoring & WiFi management สำหรับ Dustation Dev Kit V1 ใช้ในการแสดงผลค่าต่างๆที่วัดได้ และการตั้งค่าต่างๆ ผ่านเว็บบราวเซอร์
 
 ![Web Monitoring](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/cover.JPG)
 
@@ -18,9 +18,9 @@
 - การตั้งค่าผ่าน WiFi AP Mode
 
 ## Compatible Hardware
-บอร์ดพัฒนา Dustation Dev Kit V1.3 [สั่งซื้อออนไลน์](https://www.imiconsystem.com/product/dustation-dev-kit-v1-3-set/)
+บอร์ดพัฒนา Dustation Dev Kit V1 [สั่งซื้อออนไลน์](https://www.imiconsystem.com/product/dustation-dev-kit-v1-4-2/)
 
-![Dustation Dev Kit V1.3](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/20220909_152200.jpg)
+![Dustation Dev Kit V1](https://github.com/imiconsystem/ready2u-dustation-devkit-v1.3-web-man/blob/main/images/20220909_152200.jpg)
 
 ## Hardware setup
 - ติดตั้งอุปกรณ์ทั้งหมดให้ถูกต้องครบถ้วนได้แก่

@@ -77,23 +77,6 @@ void setup() {
   }
 }
 
-// void controlRelay() {
-//   if (TEMP > maxTemp) {
-//     relayHi(R1);
-//   } else if (HUMI > maxHumi) {
-//     relayHi(R1);
-//   } else if (PM1 > maxPM1) {
-//     relayHi(R1);
-//   } else if (PM2 > maxPM2) {
-//     relayHi(R1);
-//   } else if (PM10 > maxPM10) {
-//     relayHi(R1);
-//   } else {
-//     relayLo(R1);
-//   }
-// }
-
-
 
 void loop() {
 
@@ -105,7 +88,6 @@ void loop() {
     clientLoop();
     pmsLoop();
     dhtLoop();
-    //controlRelay();
     oledLoop();
 
   } else {
