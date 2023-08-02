@@ -17,6 +17,7 @@ uint8_t u8log_buffer[U8LOG_WIDTH * U8LOG_HEIGHT];
 
 void oledSetup(void) {
   u8g2.begin();
+  u8g2.setFlipMode(1);
 }
 
 void oledLogSetup(void) {
@@ -43,7 +44,7 @@ void oledDrawPage3() {
 
   u8g2.setFont(u8g2_font_siji_t_6x10);
   u8g2.drawGlyph(0, 8, 0xE219);                                                 //wifi
-
+  if (storageGetInt("devRunmode").toInt() == 2) {  u8g2.drawGlyph(0, 16, 0xE0F2);}  //rssi
   u8g2.setFont(u8g2_font_squeezed_b7_tr);
   if (storageGetInt("devRunmode").toInt() == 1) {  // AT mode
     u8g2.drawStr(15, 8, storageGetString("APssid").c_str());
@@ -55,11 +56,14 @@ void oledDrawPage3() {
     if (storageGetString("WiFissid").isEmpty()) {
       u8g2.drawStr(15, 8, "Please config WiFi!");
     } else {
-      u8g2.drawGlyph(0, 16, 0xE0F2);  //rssi
+      
       u8g2.drawStr(15, 8, storageGetString("WiFissid").c_str());
       u8g2.drawStr(15, 17, WiFiRSSI.c_str());
       u8g2.drawStr(50, 17, localIP.c_str());
-      u8g2.drawStr(50, 26, storageGetString("deviceName").c_str());
+      String localDomain;
+      localDomain +=  storageGetString("deviceName").c_str();
+      localDomain += ".local";
+      u8g2.drawStr(50, 26, localDomain.c_str());
     }
     u8g2.drawFrame(10, 21, 20, 11);
     u8g2.drawStr(16, 30, devMode[1].c_str());

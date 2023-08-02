@@ -84,7 +84,7 @@ void loop() {
 
   if (SETMODE == 0) {
 
-    if(storageGetInt("devRunmode").toInt() == 1) webserverLoop();
+    if(storageGetInt("devRunmode").toInt() == 2) webserverLoop();
     clientLoop();
     pmsLoop();
     dhtLoop();
