@@ -8,6 +8,7 @@ int devRunmode;
 //int DEVRUNMODE = 1; // Accesspoint mode (AP)
 int DEVRUNMODE = 2; // Station mode (ST)
 
+
 String WiFissid = "";
 String WiFipassword = "";
 

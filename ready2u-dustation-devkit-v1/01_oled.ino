@@ -17,7 +17,7 @@ uint8_t u8log_buffer[U8LOG_WIDTH * U8LOG_HEIGHT];
 
 void oledSetup(void) {
   u8g2.begin();
-  u8g2.setFlipMode(1);
+  //u8g2.setFlipMode(1);
 }
 
 void oledLogSetup(void) {
