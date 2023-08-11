@@ -38,7 +38,7 @@
 - เข้าเมนู Tools -> Manage Libraries ติดตั้ง Library ต่อไปนี้
 1. DHT sensor library by Adafruit Version 1.4.4 https://github.com/adafruit/DHT-sensor-library
 2. PMS Library by Mariusz Kacki Version 1.1.0 https://github.com/fu-hsi/pms
-3. U8g2lib by oliver Version 2.33.15 https://github.com/olikraus/u8g2
+3. U8g2 by oliver Version 2.33.15 https://github.com/olikraus/u8g2
 4. ezButton by ArduinoGetStarted.com Version 1.0.4 https://arduinogetstarted.com/tutorials/arduino-button-library
 
 ## Flash โปรแกรมลง ESP32
