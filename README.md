@@ -40,6 +40,7 @@
 2. PMS Library by Mariusz Kacki Version 1.1.0 https://github.com/fu-hsi/pms
 3. U8g2 by oliver Version 2.33.15 https://github.com/olikraus/u8g2
 4. ezButton by ArduinoGetStarted.com Version 1.0.4 https://arduinogetstarted.com/tutorials/arduino-button-library
+5. TridentTD_LineNotify by TridentTD Version 3.0.6 https://github.com/TridentTD/TridentTD_LineNotify
 
 ## Flash โปรแกรมลง ESP32
 1. เปิดโปรแกรม Arduino IDE
