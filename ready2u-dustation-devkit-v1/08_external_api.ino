@@ -1,7 +1,7 @@
 /* 
  * ไลบรารี่ TridentTD_LineNotify version 2.1
  */
-#define LINE_TOKEN "DdE32mGhSPtm7BF4LUEESjDf0TvNHSBpsuEUM4VQNFD"
+#define LINE_TOKEN ""
 #include <TridentTD_LineNotify.h>
 
 void lineNotifySetup() {
