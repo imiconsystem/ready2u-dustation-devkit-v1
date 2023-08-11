@@ -7,6 +7,8 @@ const char *prekey = "APcredentials";
 void storageSetup() {
   String WIssid, WIpass, Assid, Apass, www_realm, www_username, www_password, _device_name, _webTitle;
 
+  int32_t mx_temp, mx_humi, mx_pm1, mx_pm2, mx_pm10;
+
   preferences.begin(prekey, false);
 
   devRunmode = preferences.getInt("devRunmode",0);
@@ -14,11 +16,41 @@ void storageSetup() {
   Serial.print("devRunmode before: ");
   Serial.println(preferences.getInt("devRunmode"));
 
-  maxTemp = preferences.getInt("maxTemp", 0);
-  maxHumi = preferences.getInt("maxHumi", 0);
-  maxPM1 = preferences.getInt("maxPM1", 0);
-  maxPM2 = preferences.getInt("maxPM2", 0);
-  maxPM10 = preferences.getInt("maxPM10", 0);
+  mx_temp = preferences.getInt("maxTemp", 0);
+  if (mx_temp > 0) {
+    Serial.print("SET maxTemp: ");
+    maxTemp = mx_temp;
+    Serial.println("No values saved for maxTemp");
+    Serial.println("maxTemp Saved using default value.");
+  }
+  mx_humi = preferences.getInt("maxHumi", 0);
+  if (mx_humi > 0) {
+    Serial.print("SET maxHumi: ");
+    maxHumi = mx_humi;
+    Serial.println("No values saved for maxHumi");
+    Serial.println("maxHumi Saved using default value.");
+  }
+  mx_pm1 = preferences.getInt("maxPM1", 0);
+  if (mx_pm1 > 0) {
+    Serial.print("SET maxPM1: ");
+    maxPM1 = mx_pm1;
+    Serial.println("No values saved for maxPM1");
+    Serial.println("maxPM1 Saved using default value.");
+  }
+  mx_pm2 = preferences.getInt("maxPM2", 0);
+  if (mx_pm2 > 0) {
+    Serial.print("SET maxPM2: ");
+    maxPM2 = mx_pm2;
+    Serial.println("No values saved for maxPM2");
+    Serial.println("maxPM2 Saved using default value.");
+  }
+  mx_pm10 = preferences.getInt("maxPM10", 0);
+  if (mx_pm10 > 0) {
+    Serial.print("SET maxPM10: ");
+    maxPM10 = mx_pm10;
+    Serial.println("No values saved for maxPM10");
+    Serial.println("maxPM10 Saved using default value.");
+  }
 
   WIssid = preferences.getString("WiFissid", "");
   WIpass = preferences.getString("WiFipassword", "");

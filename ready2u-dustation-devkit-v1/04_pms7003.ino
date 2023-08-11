@@ -43,14 +43,14 @@ void SetPm25Level(int aqi) {
 }
 
 void pmsSetup() {
-  pms.passiveMode();    // Switch to passive mode
+  pms.passiveMode();  // Switch to passive mode
   //pinMode(set, OUTPUT);
-  
+
   //pmsReadDone = false;
 }
 
-
-int pmsSleepPeriod = 0; // first start
+int pmsNoSleep = 1;
+int pmsSleepPeriod = 0;  // first start
 int pmsStablePeriod = 0;
 bool pmsIsWakeup = false;
 void pmsWakeup() {
@@ -59,7 +59,7 @@ void pmsWakeup() {
     //digitalWrite(set, HIGH);  //Setting hardware Waking up
     pms.wakeUp();  //software sleep
     pmsIsWakeup = true;
-    pmsStablePeriod = 15;
+    pmsStablePeriod = 30;
   }
 }
 
@@ -130,7 +130,9 @@ void pmsLoop() {
         result.concat(PM10);
         Serial.print("PM 10.0 (ug/m3): ");
         Serial.println(data.PM_AE_UG_10_0);
-        pmsSleep();
+        if (pmsNoSleep == 0) {
+          pmsSleep();
+        }
 
       } else {
         Serial.println("No data.");
