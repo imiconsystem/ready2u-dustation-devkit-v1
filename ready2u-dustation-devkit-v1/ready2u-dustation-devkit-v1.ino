@@ -1,5 +1,3 @@
-#define R1 23
-
 String APssid = "R2Devkit";
 String APpassword = "dddddddd";
 
@@ -17,7 +15,11 @@ String localIP;
 String webTitle = "DustStion1";
 String device_name = "dst";
 
-int32_t maxTemp, maxHumi, maxPM1, maxPM2, maxPM10;
+int32_t maxTemp = 0; 
+int32_t maxHumi = 0;  
+int32_t maxPM1 = 0; 
+int32_t maxPM2 = 0;  
+int32_t maxPM10 = 0; 
 
 
 int32_t PM1, PM2, PM10, AQI;
@@ -39,10 +41,10 @@ void setup() {
   pmsSetup();
   oledSetup();
   oledLogSetup();
-  //relaySetup();
   resetbuttonSetup();
   storageSetup();
   dhtSetup();
+  lineNotifySetup();
 
   TEMP = 0;
   HUMI = 0;
@@ -90,6 +92,7 @@ void loop() {
     pmsLoop();
     dhtLoop();
     oledLoop();
+    lineNotifyLoop();
 
   } else {
     clientLoop();
